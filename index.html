@@ -1,34 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plane WebApp</title>
+    <title>Plane</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div class="app-header">
-        <h1>Just a plane ✈</h1>
-    </div>
-    <div class="content">
-        <p>Your fullscreen app content here...</p>
+    <div class="app-container">
+        <h1 class="app-title">Plane</h1>
+        <div class="balance-display">
+            <div class="balance-number">2000</div>
+        </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (window.Telegram && window.Telegram.WebApp) {
-                // Раскрываем на весь экран
-                Telegram.WebApp.expand();
-                
-                // Дополнительные настройки (опционально)
-                Telegram.WebApp.setHeaderColor('#4CAF50');
-                Telegram.WebApp.backgroundColor = '#f8f8f8';
-                
-                // Убираем кнопку закрытия (если нужно)
-                Telegram.WebApp.disableClosingConfirmation();
-            }
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>
