@@ -81,3 +81,47 @@
     </div>
 </body>
 </html>
+
+<!-- Кнопка для показа рекламы -->
+            <button id="showAdButton" class="ad-button">Показать рекламу</button>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация Adsgram
+        const blockId = 'int-10085'; // Замените на ваш реальный blockId
+        let adController;
+
+        if (window.Adsgram) {
+            try {
+                adController = window.Adsgram.init({ blockId });
+            } catch (e) {
+                console.error('Ошибка инициализации Adsgram:', e);
+            }
+        } else {
+            console.error('Adsgram SDK не загружен.');
+        }
+
+        // Обработчик для кнопки показа рекламы
+        document.getElementById('showAdButton').addEventListener('click', () => {
+            if (adController) {
+                adController
+                    .show()
+                    .then(() => {
+                        alert('Спасибо за просмотр рекламы! Ваш баланс будет увеличен.');
+                        // Например, увеличиваем баланс
+                        const balanceElement = document.querySelector('.balance-number');
+                        const currentBalance = parseInt(balanceElement.textContent, 10);
+                        balanceElement.textContent = currentBalance + 100; // Увеличиваем баланс на 100
+                    })
+                    .catch((error) => {
+                        console.error('Ошибка при показе рекламы:', error);
+                        alert('Произошла ошибка при показе рекламы.');
+                    });
+            } else {
+                alert('Реклама не может быть показана. Adsgram не инициализирован.');
+            }
+        });
+    </script>
+</body>
+</html>
