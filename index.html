@@ -7,10 +7,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
             text-align: center;
-            background-color: #ffffff; /* Белый фон */
-            color: #000000; /* Чёрный текст */
+            background-color: #000000; /* Чёрный фон */
+            margin: 0;
+            padding: 0;
         }
 
         .balance-display {
@@ -18,14 +18,12 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
+            position: relative;
+            margin-top: 50px;
             padding: 10px;
             font-size: 24px;
             text-align: center;
+            color: #ffffff; /* Белый текст */
         }
 
         .balance-number {
@@ -40,29 +38,34 @@
         }
 
         .todo-container {
-            margin-top: 150px; /* Отступ сверху, чтобы не перекрывать баланс */
+            margin-top: 50px; /* Отступ сверху */
         }
 
         .task-button {
             display: block;
+            width: 90%; /* Ширина кнопки относительно экрана */
+            max-width: 400px; /* Максимальная ширина кнопки */
             margin: 10px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #4caf50;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
+            padding: 20px; /* Высота кнопки */
+            font-size: 18px; /* Размер текста */
+            color: #ffffff; /* Белый текст */
+            background-color: #333333; /* Тёмно-серый фон */
+            border: none; /* Убираем границу */
+            border-radius: 25px; /* Закруглённые углы */
+            text-align: center; /* Центрирование текста */
+            text-decoration: none; /* Убираем подчеркивание (для ссылок) */
+            cursor: pointer; /* Указатель мыши */
+            transition: background-color 0.3s ease; /* Анимация изменения цвета */
         }
 
         .task-button:hover {
-            background-color: #45a049;
+            background-color: #444444; /* Цвет при наведении */
+        }
+
+        .task-button:active {
+            background-color: #222222; /* Цвет при нажатии */
         }
     </style>
-    
-<script src="https://sad.adsgram.ai/js/sad.min.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -76,54 +79,10 @@
 
         <!-- Блок кнопок-заданий -->
         <div class="todo-container">
-            <a href="https://t.me/kanal_testow" class="task-button" target="_blank">подписатся</a>
-            <a href="https://example.com/task2" class="task-button" target="_blank">Задание 2</a>
-            <a href="https://example.com/task3" class="task-button" target="_blank">Задание 3</a>
+            <a href="https://t.me/kanal_testow" class="task-button">подписатся</a>
+            <a href="https://example.com/task2" class="task-button">Задание 2</a>
+            <a href="https://example.com/task3" class="task-button">Задание 3</a>
         </div>
     </div>
-</body>
-</html>
-
-<!-- Кнопка для показа рекламы -->
-            <button id="showAdButton" class="ad-button">Показать рекламу</button>
-        </div>
-    </div>
-
-    <script>
-        // Инициализация Adsgram
-        const blockId = 'int-10085'; // Замените на ваш реальный blockId
-        let adController;
-
-        if (window.Adsgram) {
-            try {
-                adController = window.Adsgram.init({ blockId });
-            } catch (e) {
-                console.error('Ошибка инициализации Adsgram:', e);
-            }
-        } else {
-            console.error('Adsgram SDK не загружен.');
-        }
-
-        // Обработчик для кнопки показа рекламы
-        document.getElementById('showAdButton').addEventListener('click', () => {
-            if (adController) {
-                adController
-                    .show()
-                    .then(() => {
-                        alert('Спасибо за просмотр рекламы! Ваш баланс будет увеличен.');
-                        // Например, увеличиваем баланс
-                        const balanceElement = document.querySelector('.balance-number');
-                        const currentBalance = parseInt(balanceElement.textContent, 10);
-                        balanceElement.textContent = currentBalance + 100; // Увеличиваем баланс на 100
-                    })
-                    .catch((error) => {
-                        console.error('Ошибка при показе рекламы:', error);
-                        alert('Произошла ошибка при показе рекламы.');
-                    });
-            } else {
-                alert('Реклама не может быть показана. Adsgram не инициализирован.');
-            }
-        });
-    </script>
 </body>
 </html>
