@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plane</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <title>Telegram App</title>
     <style>
-        /* Добавленные стили */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
         .balance-display {
             display: flex;
             justify-content: center;
@@ -20,31 +22,60 @@
             right: 0;
             margin: 0 auto;
             padding: 10px;
-            font-size: 24px; /* Увеличиваем размер текста */
+            font-size: 24px;
             text-align: center;
         }
+
         .balance-number {
-            font-size: 32px; /* Размер текста для баланса */
+            font-size: 32px;
             font-weight: bold;
         }
+
         .animated-ticket {
-            margin-top: 10px; /* Расстояние между балансом и картинкой */
-            width: 50px; /* Примерный размер изображения */
+            margin-top: 10px;
+            width: 50px;
             height: auto;
+        }
+
+        .todo-container {
+            margin-top: 150px; /* Отступ сверху, чтобы не перекрывать баланс */
+        }
+
+        .task-button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .task-button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <div class="app-container">
-        <h1 class="app-title"></h1>
+        <!-- Блок с балансом -->
         <div class="balance-display">
             <div class="balance-content">
                 <span class="balance-number">2000</span>
                 <img src="animated-ticket.gif" class="animated-ticket">
             </div>
         </div>
-    </div>
 
-    <script src="js/app.js"></script>
+        <!-- Блок кнопок-заданий -->
+        <div class="todo-container">
+            <a href="https://t.me/kanal_testow" class="task-button" target="_blank">подписатся</a>
+            <a href="https://example.com/task2" class="task-button" target="_blank">Задание 2</a>
+            <a href="https://example.com/task3" class="task-button" target="_blank">Задание 3</a>
+        </div>
+    </div>
 </body>
 </html>
