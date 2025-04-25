@@ -56,3 +56,4 @@ document.addEventListener('DOMContentLoaded', function() {
     const rewardedAdBtn = document.getElementById('rewarded-ad-btn');
     rewardedAdBtn.addEventListener('click', addRewardedTickets);
 });
+
