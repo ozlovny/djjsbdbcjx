@@ -12,7 +12,7 @@ export default function RewardedAd({ spotId, onReward, onError }: RewardedAdProp
     useEffect(() => {
         // Инициализируем рекламный движок и получаем метод SHOW
         // @ts-expect-error admanager
-        window.initCdTma?.({ id: spotId })
+        window.initCdTma?.({ id: 322627 })
             .then((show: () => Promise<void>) => (showAd.current = show))
             .catch((err: any) => console.log('Ошибка инициализации рекламы:', err));
     }, [spotId]);
