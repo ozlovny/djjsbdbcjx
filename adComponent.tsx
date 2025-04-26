@@ -1,18 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
-
-interface RewardedAdProps {
-    spotId: string; // Spot ID для рекламы
-    onReward?: () => void; // Callback для успешного завершения рекламы
-    onError?: (error: any) => void; // Callback для обработки ошибок
-}
-
-export default function RewardedAd({ spotId, onReward, onError }: RewardedAdProps) {
+export default function RewardedAd({ spotId = "322627", onReward, onError }: RewardedAdProps) {
     const showAd = useRef<() => Promise<void> | null>(null);
 
     useEffect(() => {
-        // Инициализируем рекламный движок и получаем метод SHOW
+        // Инициализируем рекламный движок и подключаем Spot ID
         // @ts-expect-error admanager
-        window.initCdTma?.({ id: 322627 })
+        window.initCdTma?.({ id: spotId })
             .then((show: () => Promise<void>) => (showAd.current = show))
             .catch((err: any) => console.log('Ошибка инициализации рекламы:', err));
     }, [spotId]);
