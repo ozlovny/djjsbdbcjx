@@ -64,6 +64,7 @@
             text-decoration: none; /* Убираем подчеркивание (для ссылок) */
             cursor: pointer; /* Указатель мыши */
             transition: background-color 0.3s ease; /* Анимация изменения цвета */
+            user-select: none; /* Убираем выделение текста при клике */
         }
         .task-button:hover {
             background-color: #0056b3;
@@ -72,6 +73,7 @@
         /* Убираем синюю рамку при клике */
         .task-button:focus {
             outline: none;
+            box-shadow: none; /* Убираем возможное свечение */
         }
 
         .task-button:hover {
