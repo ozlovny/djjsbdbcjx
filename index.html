@@ -117,7 +117,7 @@
         <!-- Кнопки -->
         <div class="todo-container">
             <a onclick="window.show?.().then(() => { console.log('tma ad played'); addTickets(); }).catch(e => console.log(e))" class="task-button">
-    Посмотреть рекламу и получить 1 билет
+    Посмотреть рекламу и получить 10 билетов
             </a>
         </div>
     </div>
@@ -130,7 +130,7 @@
             const currentBalance = parseInt(balanceElement.textContent, 10);
             
             // Добавляем 25 к текущему балансу
-            const newBalance = currentBalance + 1;
+            const newBalance = currentBalance + 10;
             
             // Обновляем текстовое содержимое с новым балансом
             balanceElement.textContent = newBalance;
