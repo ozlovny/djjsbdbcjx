@@ -8,12 +8,7 @@
     <script src="https://js.onclckvd.com/in-stream-ad-admanager/tma.js"></script>
     </head>
     <style>
-        <div class="balance-display">
-            <div class="balance-content">
-                <span class="balance-number">0</span>
-                <img src="animated-ticket.gif" class="animated-ticket">
-            </div>
-        </div>
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -78,6 +73,12 @@
 </head>
 <body>
     <div class="app-container">
+        <div class="balance-display">
+            <div class="balance-content">
+                <span class="balance-number">0</span>
+                <img src="animated-ticket.gif" class="animated-ticket">
+            </div>
+        </div>
         <!-- Блок с балансом -->
         
 
@@ -100,34 +101,3 @@
             <button class="task-button" id="rewarded-ad-btn">Посмотреть рекламу и получить 25 билетов</button>
         </div>
     </div>
-
-    <script src="js/app.js"></script>
-</body>
-</html>
-<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-</head>
-<body>
-    <div id="root"></div>
-    <script type="text/babel" data-type="module">
-      // Ваш React-компонент
-      const RewardedAd = ({ 6072092 }) => {
-          const handleClick = () => {
-              console.log(`Показ рекламы с Spot ID: ${spotId}`);
-          };
-
-          return (
-              <button onClick={handleClick}>
-                  Показать рекламу
-              </button>
-          );
-      };
-
-      // Рендерим компонент
-      ReactDOM.createRoot(document.getElementById('root')).render(
-          <RewardedAd spotId="322627" />
-      );
-    </script>
-</body>
-</html>
