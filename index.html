@@ -80,6 +80,18 @@
             </div>
         </div>
         <!-- Блок с балансом -->
+        <script>
+    // Инициализация рекламного менеджера
+    window.initCdTma?.({ id: 'Your Spot ID' })
+      .then(show => window.show = show)
+      .catch(e => console.log(e));
+  </script>
+  <!-- Кнопка для показа рекламы -->
+  <button onclick="window.show?.().then(() => console.log('tma ad played')).catch(e => console.log(e))">
+    Play Ads
+  </button>
+</body>
+</html>
         
 
         <!-- Блок кнопок-заданий -->
