@@ -1,33 +1,25 @@
-export default function RewardedAd({ spotId = "322627", onReward, onError }: RewardedAdProps) {
-    const showAd = useRef<() => Promise<void> | null>(null);
+// adComponent.tsx
 
-    useEffect(() => {
-        // Инициализируем рекламный движок и подключаем Spot ID
-        // @ts-expect-error admanager
-        window.initCdTma?.({ id: spotId })
-            .then((show: () => Promise<void>) => (showAd.current = show))
-            .catch((err: any) => console.log('Ошибка инициализации рекламы:', err));
-    }, [spotId]);
+import { useEffect, useRef, useState } from 'react'
 
-    return (
-        <button
-            onClick={() => {
-                if (showAd.current) {
-                    showAd.current()
-                        .then(() => {
-                            console.log('Реклама успешно показана');
-                            onReward?.(); // Вызываем callback для награды
-                        })
-                        .catch((err: any) => {
-                            console.error('Ошибка показа рекламы:', err);
-                            onError?.(err); // Вызываем callback для обработки ошибок
-                        });
-                } else {
-                    console.error('Реклама не инициализирована');
-                }
-            }}
-        >
-            Показать рекламу
-        </button>
-    );
+export default function Component() {
+	const [id] = useState(6072092)
+	const showAd = useRef()
+	useEffect(() => {
+		// Initialize the ad engine and get the SHOW method to display ads
+		// @ts-expect-error admanager
+		window.initCdTma?.({ id }).then(show => showAd.current = show).catch(e => console.log(e))
+	}, [id])
+	return (
+		<>
+// When the button is pressed, we activate the obtained SHOW method, which will return a Promise with the result of the ad display success.
+			<button onClick={() => {
+					showAd.current?.().then(() => onReward?.())
+									  .catch((err: any) => onError?.(err))
+				}}
+			>
+				Call Ad
+			</button>
+		</>
+	)
 }
