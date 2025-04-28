@@ -8,6 +8,105 @@
     <script src="https://js.onclckvd.com/in-stream-ad-admanager/tma.js"></script>
     </head>
     <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000; /* Черный фон */
+        }
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+
+    <script>
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+
+        // Устанавливаем размер canvas на весь экран
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Массив для хранения частиц
+        const particlesArray = [];
+
+        // Настройки частиц
+        const numberOfParticles = 100;
+        const maxParticleSize = 3;
+
+        // Класс для частиц
+        class Particle {
+            constructor(x, y, dx, dy, size, color) {
+                this.x = x;
+                this.y = y;
+                this.dx = dx; // Скорость по оси X
+                this.dy = dy; // Скорость по оси Y
+                this.size = size;
+                this.color = color;
+            }
+
+            // Метод для отрисовки частицы
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+
+            // Метод для обновления положения частицы
+            update() {
+                this.x += this.dx;
+                this.y += this.dy;
+
+                // Проверяем границы экрана
+                if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+                    this.dx = -this.dx;
+                }
+                if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+                    this.dy = -this.dy;
+                }
+
+                this.draw();
+            }
+        }
+
+        // Функция для создания частиц
+        function initParticles() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                const size = Math.random() * maxParticleSize + 1; // Размер частицы
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                const dx = (Math.random() - 0.5) * 2; // Скорость по X
+                const dy = (Math.random() - 0.5) * 2; // Скорость по Y
+                const color = `rgba(255, 255, 255, ${Math.random()})`; // Цвет
+                particlesArray.push(new Particle(x, y, dx, dy, size, color));
+            }
+        }
+
+        // Анимационный цикл
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Очищаем canvas
+            particlesArray.forEach(particle => particle.update()); // Обновляем частицы
+            requestAnimationFrame(animate); // Зацикливаем анимацию
+        }
+
+        // Подгоняем canvas под размер окна при изменении размера экрана
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particlesArray.length = 0; // Очищаем массив частиц
+            initParticles(); // Создаём новые частицы
+        });
+
+        // Запуск
+        initParticles();
+        animate();
+    </script>
         
         button:focus, a:focus {
     outline: none;
