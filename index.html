@@ -238,3 +238,15 @@
     </script>
 </body>
 </html>
+<script>
+    // Извлечь Telegram ID из URL
+const urlParams = new URLSearchParams(window.location.search);
+const tgId = urlParams.get('tg_id');
+
+// Если Telegram ID не задан, вывести ошибку
+if (!tgId) {
+    alert('Telegram ID не найден в URL!');
+} else {
+    console.log('Получен Telegram ID:', tgId);
+}
+</script>
