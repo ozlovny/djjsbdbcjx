@@ -102,6 +102,21 @@
 
         <!-- Кнопки -->
         <div class="todo-container">
-            <a onclick="window.show?.().then(() => console.log('tma ad played')).catch(e => console.log(e))" class="task-button">Посмотреть рекламу и получить 25 билетов</a>
+            <a onclick="window.show?.().then(() => console.log('tma ad played')).catch(e => console.log(e)) addTickets()" class="task-button">Посмотреть рекламу и получить 25 билетов</a>
         </div>
     </div>
+<script>
+        function addTickets() {
+            // Находим элемент с балансом
+            const balanceElement = document.querySelector('.balance-number');
+            
+            // Получаем текущее значение баланса
+            const currentBalance = parseInt(balanceElement.textContent, 10);
+            
+            // Добавляем 25 к текущему балансу
+            const newBalance = currentBalance + 25;
+            
+            // Обновляем текстовое содержимое с новым балансом
+            balanceElement.textContent = newBalance;
+        }
+</script>
