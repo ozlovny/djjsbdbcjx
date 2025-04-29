@@ -82,6 +82,21 @@
         .task-button:active {
             background-color: #222222; /* Цвет при нажатии */
         }
+        #debug {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+        }
+        #debug span {
+            margin-right: 20px;
+        }
     </style>
 </head>
 <body>
@@ -238,15 +253,28 @@
     </script>
 </body>
 </html>
-<script>
-    // Извлечь Telegram ID из URL
-const urlParams = new URLSearchParams(window.location.search);
-const tgId = urlParams.get('tg_id');
+<body>
+    <div id="debug">
+        <span id="hash">Hash: Generating...</span>
+        <span id="time">Time: 0 seconds</span>
+    </div>
 
-// Если Telegram ID не задан, вывести ошибку
-if (!tgId) {
-    alert('Telegram ID не найден в URL!');
-} else {
-    console.log('Получен Telegram ID:', tgId);
-}
-</script>
+    <script>
+        // Function to generate a random hash
+        function generateHash() {
+            return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        }
+
+        // Initialize the hash and set it in the debug panel
+        document.getElementById('hash').textContent = `Hash: ${generateHash()}`;
+
+        // Initialize a timer that starts from 0 seconds
+        let elapsedSeconds = 0;
+
+        // Update the time every second
+        setInterval(() => {
+            elapsedSeconds++;
+            document.getElementById('time').textContent = `Time: ${elapsedSeconds} seconds`;
+        }, 1000);
+    </script>
+</body>
