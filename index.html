@@ -278,3 +278,10 @@
         }, 1000);
     </script>
 </body>
+    <script>
+// Получение ID пользователя
+const telegram = window.Telegram.WebApp;
+const userId = telegram.initDataUnsafe.user.id;
+    </script>
+
+console.log(`User ID: ${userId}`);
