@@ -97,6 +97,37 @@
         #debug span {
             margin-right: 20px;
         }
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #222;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .button img {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 5px;
+        }
+
+        .button span {
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
@@ -286,3 +317,17 @@ const userId = telegram.initDataUnsafe.user.id;
 
 console.log(`User ID: ${userId}`);
 </script>
+        <div class="bottom-bar">
+        <a href="#" class="button">
+            <img src="https://via.placeholder.com/32" alt="Icon 1">
+            <span>Title 1</span>
+        </a>
+        <a href="#" class="button">
+            <img src="https://via.placeholder.com/32" alt="Icon 2">
+            <span>Title 2</span>
+        </a>
+        <a href="#" class="button">
+            <img src="https://via.placeholder.com/32" alt="Icon 3">
+            <span>Title 3</span>
+        </a>
+        </div>
