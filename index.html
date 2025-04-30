@@ -335,6 +335,7 @@ const userId = telegram.initDataUnsafe.user.id;
         <h1>Профиль</h1>
         <p>Контент для профиля.</p>
     </div>
+            </div>
     
         
     
@@ -365,12 +366,5 @@ console.log(`User ID: ${userId}`);
             if (activeScene) {
                 activeScene.classList.add('active');
             }
-        }
-
-        // Функция для добавления билетов
-        function addTickets() {
-            const balanceElement = document.querySelector('.balance-number');
-            const currentBalance = parseInt(balanceElement.textContent, 10);
-            balanceElement.textContent = currentBalance + 10;
         }
 </script>
