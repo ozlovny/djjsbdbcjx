@@ -19,6 +19,18 @@
             margin: 0;
             padding: 0;
         }
+        .scene {
+            display: none; /* Скрываем сцены по умолчанию */
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .scene.active {
+            display: flex; /* Показываем активную сцену */
 
         .balance-display {
             display: flex;
@@ -315,6 +327,15 @@
 // Получение ID пользователя
 const telegram = window.Telegram.WebApp;
 const userId = telegram.initDataUnsafe.user.id;
+        </div>
+    <div id="swap" class="scene">
+        <h1>Обмен</h1>
+        <p>Контент для обмена.</p>
+    </div>
+    <div id="profile" class="scene">
+        <h1>Профиль</h1>
+        <p>Контент для профиля.</p>
+    </div>
     
         
     
@@ -323,16 +344,34 @@ console.log(`User ID: ${userId}`);
 </script>
     </div>
         <div class="bottom-bar">
-        <a href="#" class="button">
+            <div class="button" onclick="showScene('tasks')">
             <img src="task.png" alt="Icon 1">
             <span>задания</span>
-        </a>
-        <a href="#" class="button">
+            </div>
+        <div class="button" onclick="showScene('swap')">
             <img src="swap.png" alt="Icon 2">
             <span>обмен</span>
-        </a>
-        <a href="#" class="button">
+        </div>
+        <div class="button" onclick="showScene('profile')">
             <img src="profile.png" alt="Icon 3">
             <span>профиль</span>
-        </a>
         </div>
+        </div>
+<script>
+        // Функция для переключения сцен
+        function showScene(sceneId) {
+            const scenes = document.querySelectorAll('.scene');
+            scenes.forEach(scene => scene.classList.remove('active'));
+            const activeScene = document.getElementById(sceneId);
+            if (activeScene) {
+                activeScene.classList.add('active');
+            }
+        }
+
+        // Функция для добавления билетов
+        function addTickets() {
+            const balanceElement = document.querySelector('.balance-number');
+            const currentBalance = parseInt(balanceElement.textContent, 10);
+            balanceElement.textContent = currentBalance + 10;
+        }
+</script>
