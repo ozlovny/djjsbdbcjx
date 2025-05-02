@@ -154,12 +154,7 @@
             </div>
         </div>
         <!-- Блок с балансом -->
-        <script>
-    // Инициализация рекламного менеджера
-    window.initCdTma?.({ id: '6072092' })
-      .then(show => window.show = show)
-      .catch(e => console.log(e));
-  </script>
+
 
         <div class="todo-container">
             <a href="https://t.me/kanal_testow" class="task-button">подписатся</a>
@@ -176,8 +171,7 @@
         <!-- Кнопки -->
         <div class="todo-container">
             
-           <a onclick="handleButtonWithDelay(this, () => window.show?.().then(() => { console.log('tma ad played'); addTickets(); }).catch(e => console.log(e)))"
-           class="task-button">
+           <a id="adButtonTMA" class="task-button tma-ad-button" onclick="handleTmaAdClick()">Посмотреть рекламу (TMA) и получить 10 билетов</a>
 		<a onclick="handleButtonClick(this, showAd)" class="task-button">Посмотреть рекламу и получить 10 билетов</a>
         </div>
     </div>
@@ -411,3 +405,60 @@
             balanceElement.textContent = currentBalance + 10;
         }
 	</script>
+    <script>
+        // Обрабатываем кнопку для TMA рекламы
+        function handleTmaAdClick() {
+            const button = document.querySelector('.tma-ad-button');
+            if (button.classList.contains('disabled')) {
+                return; // Если кнопка заблокирована, ничего не делаем
+            }
+
+            // Выполняем функционал для TMA
+            if (window.initCdTma) {
+                window.initCdTma?.({ id: '6072092' })
+                    .then(show => {
+                        show(); // Показываем рекламу
+                        console.log('TMA реклама показана');
+                        addTickets(); // Добавляем билеты после рекламы
+                    })
+                    .catch(e => console.error('Ошибка показа TMA рекламы:', e));
+            } else {
+                console.error("Скрипт TMA (https://js.onclckvd.com) не загружен.");
+            }
+
+   
+
+   
+            // Блокируем кнопку
+            startCooldown(button, 10); // Задержка 10 секунд
+        }
+
+        // Функция для добавления билетов
+        function addTickets() {
+            const balanceElement = document.querySelector('.balance-number');
+            const currentBalance = parseInt(balanceElement.textContent, 10);
+            balanceElement.textContent = currentBalance + 10; // Увеличиваем баланс на 10
+        }
+
+        // Общая функция для задержки кнопки
+        function startCooldown(button, cooldownTime) {
+            button.classList.add('disabled');
+            button.style.pointerEvents = 'none';
+
+            let cooldown = cooldownTime;
+            const originalText = button.textContent;
+
+            // Обновляем текст с таймером
+            const timer = setInterval(() => {
+                button.textContent = `Подождите ${cooldown} секунд...`;
+                cooldown--;
+
+                if (cooldown < 0) {
+                    clearInterval(timer);
+                    button.classList.remove('disabled');
+                    button.style.pointerEvents = '';
+                    button.textContent = originalText; // Восстанавливаем исходный текст
+                }
+            }, 1000); // Обновляем каждую секунду
+        }
+    </script>
