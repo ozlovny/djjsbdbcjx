@@ -366,7 +366,7 @@
             button.classList.add('disabled');
             button.style.pointerEvents = 'none';
 
-            let cooldown = 15; // Задержка в секундах
+            let cooldown = 20; // Задержка в секундах
             const originalText = button.textContent; // Сохраняем оригинальный текст кнопки
 
             // Обновляем текст кнопки с таймером
@@ -430,14 +430,14 @@
 
    
             // Блокируем кнопку
-            startCooldown(button, 10); // Задержка 10 секунд
+            startCooldown(button, 20); // Задержка 10 секунд
         }
 
         // Функция для добавления билетов
         function addTickets() {
             const balanceElement = document.querySelector('.balance-number');
             const currentBalance = parseInt(balanceElement.textContent, 10);
-            balanceElement.textContent = currentBalance + 15; // Увеличиваем баланс на 10
+            balanceElement.textContent = currentBalance + 10; // Увеличиваем баланс на 10
         }
 
         // Общая функция для задержки кнопки
