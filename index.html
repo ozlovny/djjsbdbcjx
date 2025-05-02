@@ -177,33 +177,60 @@
         </div>
     </div>
 	<script>
-        // Функция для установки куков
-        function setCookie(name, value, days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            const expires = "expires=" + date.toUTCString();
-            document.cookie = name + "=" + value + ";" + expires + ";path=/";
-        }
+        // Telegram Web App API
+        const tg = window.Telegram.WebApp;
 
-        // Функция для получения куков
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
-        }
+        // Функция для загрузки баланса из Telegram Storage
+        async function loadBalance() {
+            try {
+                const initDataUnsafe = tg.initDataUnsafe;
+                const userId = initDataUnsafe.user.id; // Уникальный ID пользователя Telegram
+                const key = `user_balance_${userId}`; // Уникальный ключ для хранения данных
 
-        // Обновление баланса при загрузке страницы
-        function loadBalance() {
-            const savedBalance = getCookie('balance');
-            if (savedBalance) {
-                document.querySelector('.balance-number').textContent = savedBalance;
+                // Загружаем баланс из локального хранилища Telegram
+                const storedBalance = await tg.storage.get(key);
+                const balance = storedBalance ? parseInt(storedBalance, 10) : 0;
+
+                // Обновляем отображение баланса
+                document.getElementById("balance").textContent = balance;
+            } catch (error) {
+                console.error("Ошибка при загрузке баланса:", error);
             }
         }
+
+        // Функция для сохранения баланса в Telegram Storage
+        async function saveBalance(balance) {
+            try {
+                const initDataUnsafe = tg.initDataUnsafe;
+                const userId = initDataUnsafe.user.id; // Уникальный ID пользователя Telegram
+                const key = `user_balance_${userId}`; // Уникальный ключ для хранения данных
+
+                // Сохраняем баланс в локальном хранилище Telegram
+                await tg.storage.set(key, balance.toString());
+                console.log("Баланс сохранён:", balance);
+            } catch (error) {
+                console.error("Ошибка при сохранении баланса:", error);
+            }
+        }
+
+        // Функция для добавления билетов
+        async function addTickets() {
+            const balanceElement = document.getElementById("balance");
+            let currentBalance = parseInt(balanceElement.textContent, 10);
+            currentBalance += 10; // Добавляем 10 баллов
+
+            // Обновляем отображение баланса
+            balanceElement.textContent = currentBalance;
+
+            // Сохраняем баланс в Telegram Storage
+            await saveBalance(currentBalance);
+
+            // Отправляем данные обратно в Telegram (если требуется)
+            tg.sendData(JSON.stringify({ balance: currentBalance }));
+        }
+
+        // Загружаем баланс при загрузке страницы
+        loadBalance();
 	</script>
 <script>
         function addTickets() {
@@ -491,6 +518,6 @@
                 }
             }, 1000); // Обновляем каждую секунду
         }
-	    window.onload = loadBalance;
+	    
     </script>
 	
