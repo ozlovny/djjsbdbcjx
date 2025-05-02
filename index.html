@@ -180,56 +180,54 @@
         // Telegram Web App API
         const tg = window.Telegram.WebApp;
 
-        // Функция для загрузки баланса из Telegram Storage
+        // Функция для загрузки баланса из Telegram Web Apps Storage
         async function loadBalance() {
             try {
-                const initDataUnsafe = tg.initDataUnsafe;
-                const userId = initDataUnsafe.user.id; // Уникальный ID пользователя Telegram
-                const key = `user_balance_${userId}`; // Уникальный ключ для хранения данных
+                const userId = tg.initDataUnsafe.user.id; // Уникальный ID пользователя Telegram
+                const balanceKey = user_balance_${userId}; // Ключ для хранения баланса
 
-                // Загружаем баланс из локального хранилища Telegram
-                const storedBalance = await tg.storage.get(key);
+                // Загружаем баланс из хранилища
+                const storedBalance = localStorage.getItem(balanceKey);
                 const balance = storedBalance ? parseInt(storedBalance, 10) : 0;
 
-                // Обновляем отображение баланса
-                document.getElementById("balance").textContent = balance;
+                // Отображаем баланс
+                document.querySelector('.balance-number').textContent = balance;
             } catch (error) {
                 console.error("Ошибка при загрузке баланса:", error);
             }
         }
 
-        // Функция для сохранения баланса в Telegram Storage
-        async function saveBalance(balance) {
+        // Функция для сохранения баланса в Telegram Web Apps Storage
+        async function saveBalance(newBalance) {
             try {
-                const initDataUnsafe = tg.initDataUnsafe;
-                const userId = initDataUnsafe.user.id; // Уникальный ID пользователя Telegram
-                const key = `user_balance_${userId}`; // Уникальный ключ для хранения данных
+                const userId = tg.initDataUnsafe.user.id; // Уникальный ID пользователя Telegram
+                const balanceKey = user_balance_${userId}; // Ключ для хранения баланса
 
-                // Сохраняем баланс в локальном хранилище Telegram
-                await tg.storage.set(key, balance.toString());
-                console.log("Баланс сохранён:", balance);
+                // Сохраняем баланс
+                localStorage.setItem(balanceKey, newBalance.toString());
+                console.log("Баланс сохранён:", newBalance);
             } catch (error) {
                 console.error("Ошибка при сохранении баланса:", error);
             }
         }
 
         // Функция для добавления билетов
-        async function addTickets() {
-            const balanceElement = document.getElementById("balance");
-            let currentBalance = parseInt(balanceElement.textContent, 10);
-            currentBalance += 10; // Добавляем 10 баллов
+        async function addTickets(amount) {
+            const balanceElement = document.querySelector('.balance-number');
+            let currentBalance = parseInt(balanceElement.textContent, 10) || 0;
 
-            // Обновляем отображение баланса
-            balanceElement.textContent = currentBalance;
+            // Увеличиваем баланс
+            const newBalance = currentBalance + amount;
+            balanceElement.textContent = newBalance;
 
-            // Сохраняем баланс в Telegram Storage
-            await saveBalance(currentBalance);
+            // Сохраняем  новый баланс
+            await saveBalance(newBalance);
 
             // Отправляем данные обратно в Telegram (если требуется)
-            tg.sendData(JSON.stringify({ balance: currentBalance }));
+            tg.sendData(JSON.stringify({ balance: newBalance }));
         }
 
-        // Загружаем баланс при загрузке страницы
+        // Загружаем баланс при старте
         loadBalance();
 	</script>
 <script>
