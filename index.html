@@ -176,7 +176,7 @@
 		<a onclick="handleButtonClick(this, showAd)" class="task-button">Посмотреть рекламу и получить 10 билетов</a>
         </div>
     </div>
-	<script>
+        <script>
         // Telegram Web App API
         const tg = window.Telegram.WebApp;
 
@@ -211,6 +211,34 @@
             }
         }
 
+        // Функция для обработки рекламы TMA
+        async function handleTmaAdClick() {
+            const button = document.getElementById('adButtonTMA');
+            if (button.disabled) return;
+
+            button.disabled = true; // Блокируем кнопку
+
+            // Симуляция показа рекламы
+            setTimeout(() => {
+                addTickets(10); // Добавляем 10 билетов
+                button.disabled = false; // Разблокируем кнопку
+            }, 2000); // Задержка 2 секунды для симуляции рекламы
+        }
+
+        // Функция для обработки рекламы Show
+        async function handleShowAdClick() {
+            const button = document.getElementById('adButtonShow');
+            if (button.disabled) return;
+
+            button.disabled = true; // Блокируем кнопку
+
+            // Симуляция показа рекламы
+            setTimeout(() => {
+                addTickets(10); // Добавляем 10 билетов
+                button.disabled = false; // Разблокируем кнопку
+            }, 2000); // Задержка 2 секунды для симуляции рекламы
+        }
+
         // Функция для добавления билетов
         async function addTickets(amount) {
             const balanceElement = document.querySelector('.balance-number');
@@ -220,7 +248,7 @@
             const newBalance = currentBalance + amount;
             balanceElement.textContent = newBalance;
 
-            // Сохраняем  новый баланс
+            // Сохраняем новый баланс
             await saveBalance(newBalance);
 
             // Отправляем данные обратно в Telegram (если требуется)
