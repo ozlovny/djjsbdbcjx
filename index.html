@@ -6,6 +6,7 @@
     <title>Telegram App</title>
     <head>
     <script src="https://js.onclckvd.com/in-stream-ad-admanager/tma.js"></script>
+	    <script src='//whephiwums.com/sdk.js' data-zone='9286586' data-sdk='show_9286586'></script>
     </head>
     <style>
         button:focus, a:focus {
@@ -177,6 +178,7 @@
             <a onclick="window.show?.().then(() => { console.log('tma ad played'); addTickets(); }).catch(e => console.log(e))" class="task-button">
     Посмотреть рекламу и получить 10 билетов
             </a>
+		<a onclick="handleButtonClick(this, showAd)" class="task-button">Посмотреть рекламу и получить 10 билетов</a>
         </div>
     </div>
 <script>
@@ -356,3 +358,56 @@
         }
 </script>
 </body>
+	<script>
+        // Функция для обработки нажатия с задержкой и таймером
+        function handleButtonClick(button, callback) {
+            if (button.classList.contains('disabled')) {
+                return; // Если кнопка уже отключена, ничего не делаем
+            }
+
+            // Выполняем действие кнопки
+            callback();
+
+            // Блокируем кнопку
+            button.classList.add('disabled');
+            button.style.pointerEvents = 'none';
+
+            let cooldown = 10; // Задержка в секундах
+            const originalText = button.textContent; // Сохраняем оригинальный текст кнопки
+
+            // Обновляем текст кнопки с таймером
+            const timer = setInterval(() => {
+                button.textContent = `Подождите ${cooldown} секунд...`;
+                cooldown--;
+
+                if (cooldown < 0) {
+                    clearInterval(timer);
+                    button.classList.remove('disabled');
+                    button.style.pointerEvents = '';
+                    button.textContent = originalText; // Восстанавливаем оригинальный текст
+                }
+            }, 1000); // Обновление каждую секунду
+        }
+
+        // Функция для показа рекламы
+        function showAd() {
+            if (typeof show_9286586 === 'function') {
+                show_9286586().then(() => {
+                    console.log('Реклама показана');
+                    addTickets(); // Добавляем билеты после рекламы
+                }).catch(e => console.error('Ошибка показа рекламы:', e));
+            } else {
+                console.error("Функция show_9286586 недоступна.");
+            }
+        }
+
+        // Функция для добавления билетов
+        function addTickets() {
+            // Находим элемент с балансом
+            const balanceElement = document.querySelector('.balance-number');
+            const currentBalance = parseInt(balanceElement.textContent, 10);
+
+            // Добавляем 10 билетов
+            balanceElement.textContent = currentBalance + 10;
+        }
+	</script>
