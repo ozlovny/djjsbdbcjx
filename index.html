@@ -7,6 +7,7 @@
     <head>
     <script src="https://js.onclckvd.com/in-stream-ad-admanager/tma.js"></script>
 	    <script src='//whephiwums.com/sdk.js' data-zone='9286586' data-sdk='show_9286586'></script>
+	    
     </head>
     <style>
         button:focus, a:focus {
@@ -175,6 +176,35 @@
 		<a onclick="handleButtonClick(this, showAd)" class="task-button">Посмотреть рекламу и получить 10 билетов</a>
         </div>
     </div>
+	<script>
+        // Функция для установки куков
+        function setCookie(name, value, days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + date.toUTCString();
+            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        }
+
+        // Функция для получения куков
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Обновление баланса при загрузке страницы
+        function loadBalance() {
+            const savedBalance = getCookie('balance');
+            if (savedBalance) {
+                document.querySelector('.balance-number').textContent = savedBalance;
+            }
+        }
+	</script>
 <script>
         function addTickets() {
             // Находим элемент с балансом
@@ -461,4 +491,6 @@
                 }
             }, 1000); // Обновляем каждую секунду
         }
+	    window.onload = loadBalance;
     </script>
+	
