@@ -161,9 +161,8 @@
     .newstabel__title {
       color: #fff;
       font-size: 24px;
-      letter-spacing: 4px;
       margin-top: 24px;
-      margin-left: 30px;
+      margin-left: 22px;
       margin-bottom: 90px;
       font-family: sans-serif;
     }
@@ -178,7 +177,6 @@
       align-items: center;
       justify-content: center;
       font-size: 24px;
-      letter-spacing: 4px;
       margin-left: 15px;
       font-family: sans-serif;
       text-decoration: none;
@@ -196,6 +194,15 @@
     .newstabel__chip:focus {
       outline: 2px solid #888;
 	  }
+	      .newstabel__img {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 80px;   /* Можно изменить размер под ваш макет */
+  height: 80px;  /* Можно изменить размер под ваш макет */
+  border-radius: 16px; /* Если нужна скруглённая картинка */
+  object-fit: cover;
+	    }
     </style>
 </head>
 <body>
@@ -211,6 +218,7 @@
 		     <div class="newstabel">
     <div class="newstabel__title">образец</div>
     <a class="newstabel__chip" href="https://example.com" target="_blank">образец</a>
+			     <img class="newstabel__img" src="newsofficial.png" alt="Логотип проекта">
 		     </div>
 
 
